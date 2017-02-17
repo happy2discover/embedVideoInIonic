@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicHistory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,9 +21,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       StatusBar.styleDefault();
     }
   });
+
+  $ionicPlatform.registerBackButtonAction(function(event) {
+    console.log('event', event);
+
+    $ionicHistory.goBack();
+  },
+  101);
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.tabs.style('standard');
+  $ionicConfigProvider.tabs.position('bottom');
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -82,4 +91,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
-});
+})
+
+.directive('hideTabs', function($rootScope) {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attributes) {
+      scope.$on('$ionicView.beforeEnter', function() {
+        scope.$watch(attributes.hideTabs, function(value){
+          $rootScope.hideTabs = value;
+
+        });
+      });
+
+      scope.$on('$ionicView.beforeLeave', function() {
+        $rootScope.hideTabs = false;
+      });
+    }
+  };
+})
+
+;

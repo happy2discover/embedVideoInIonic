@@ -4,11 +4,25 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{chat.name}}">
+<ion-view view-title="{{chat.name}}" hide-tabs="true">
   <ion-content class="padding">
     <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
     <p>
       {{chat.lastText}}
     </p>
+
+    <div id="youkuplayer" style="width:320px; height: 240px;"></div>
+
+    <br/>
+
+    <div id="mod_player"></div>
+
+    <br/>
+
+    <video controls="controls" width="320" height="240" src="http://122.5.0.154/vhot2.qqvideo.tc.qq.com/h0375exjd3r.mp4?sdtfrom=v5010&guid=43e6cf425b6c53cc3e5785ae3b870c03&vkey=5021C57C24CE1160FBFD2DBDAB2365C33F819D98EF3FF276DD1E6008A945FB5CB79AF18CD9BC16E946659F8E3C724165CD66A97542B2C2FAE23CCAC607499B9472FD6867EC40BB0291E7D9500B2509391D24FDCA1A6A6458"
+    ></video>
+
   </ion-content>
+
 </ion-view>
+
